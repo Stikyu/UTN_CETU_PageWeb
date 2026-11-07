@@ -1,0 +1,316 @@
+(function () {
+  "use strict";
+
+  var $ = function (selector, context) {
+    return (context || document).querySelector(selector);
+  };
+  var $$ = function (selector, context) {
+    return Array.prototype.slice.call(
+      (context || document).querySelectorAll(selector)
+    );
+  };
+
+  var reduceMotion =
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function normalize(text) {
+    return (text || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+  }
+
+  /* ---------------- Menú móvil ---------------- */
+  function initMobileNav() {
+    var nav = $(".nav");
+    var menu = nav ? $("ul", nav) : null;
+    if (!nav || !menu) return;
+
+    if (!menu.id) menu.id = "navMenu";
+
+    var toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "nav-toggle";
+    toggle.setAttribute("aria-label", "Abrir menú");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-controls", menu.id);
+    toggle.innerHTML = "<span></span><span></span><span></span>";
+    nav.appendChild(toggle);
+
+    function setOpen(open) {
+      menu.classList.toggle("open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+    }
+
+    toggle.addEventListener("click", function () {
+      setOpen(!menu.classList.contains("open"));
+    });
+
+    menu.addEventListener("click", function (event) {
+      if (event.target.closest("a")) setOpen(false);
+    });
+
+    document.addEventListener("click", function (event) {
+      if (!nav.contains(event.target)) setOpen(false);
+    });
+
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 640) setOpen(false);
+    });
+  }
+
+  /* ---------------- Buscadores ---------------- */
+  function initSearch(config) {
+    var input = document.getElementById(config.inputId);
+    var empty = document.getElementById(config.emptyId);
+    if (!input) return;
+
+    var items = $$(config.itemSelector);
+
+    input.addEventListener("input", function () {
+      var query = normalize(input.value.trim());
+      var visible = 0;
+
+      items.forEach(function (item) {
+        var match = !query || normalize(item.textContent).indexOf(query) !== -1;
+        item.classList.toggle("is-hidden", !match);
+        if (match) visible++;
+      });
+
+      if (empty) empty.hidden = visible !== 0;
+    });
+  }
+
+  /* ---------------- Copiar al portapapeles ---------------- */
+  function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text).then(
+        function () {
+          return true;
+        },
+        function () {
+          return legacyCopy(text);
+        }
+      );
+    }
+    return Promise.resolve(legacyCopy(text));
+  }
+
+  function legacyCopy(text) {
+    try {
+      var area = document.createElement("textarea");
+      area.value = text;
+      area.setAttribute("readonly", "");
+      area.style.position = "fixed";
+      area.style.opacity = "0";
+      document.body.appendChild(area);
+      area.select();
+      var ok = document.execCommand("copy");
+      document.body.removeChild(area);
+      return ok;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function initCopyButtons() {
+    var links = $$('.foot-col a[href*="wa.me"], .foot-col a[href^="mailto:"]');
+
+    links.forEach(function (link) {
+      var text = link.textContent.trim();
+      if (!text) return;
+
+      link.classList.add("copy-target");
+
+      var button = document.createElement("button");
+      button.type = "button";
+      button.className = "copy-btn";
+      button.textContent = "Copiar";
+      button.setAttribute("aria-label", "Copiar " + text);
+
+      button.addEventListener("click", function (event) {
+        event.preventDefault();
+        copyText(text).then(function (ok) {
+          button.textContent = ok ? "¡Copiado!" : "No se pudo";
+          button.classList.toggle("copied", ok);
+          window.setTimeout(function () {
+            button.textContent = "Copiar";
+            button.classList.remove("copied");
+          }, 1600);
+        });
+      });
+
+      link.insertAdjacentElement("afterend", button);
+    });
+  }
+
+  /* ---------------- Formulario de contacto ---------------- */
+  function initContactForm() {
+    var form = document.getElementById("contactForm");
+    if (!form) return;
+
+    var status = document.getElementById("formStatus");
+    var mailBtn = document.getElementById("mailBtn");
+
+    var waFooter = $('.foot-col a[href*="wa.me"]');
+    var mailFooter = $('.foot-col a[href^="mailto:"]');
+
+    var phone = waFooter
+      ? waFooter.href.split("wa.me/")[1].split("?")[0]
+      : "5493410000001";
+    var email = mailFooter
+      ? mailFooter.href.replace("mailto:", "").split("?")[0]
+      : "cetufeti@gmail.com";
+
+    function setStatus(message, isError) {
+      if (!status) return;
+      status.textContent = message;
+      status.classList.toggle("error", Boolean(isError));
+    }
+
+    function collect() {
+      var name = form.elements.nombre;
+      var mail = form.elements.email;
+      var year = form.elements.anio;
+      var message = form.elements.mensaje;
+      var fields = [name, mail, year, message];
+
+      var valid = true;
+      fields.forEach(function (field) {
+        var fieldValid = field.checkValidity();
+        field.classList.toggle("invalid", !fieldValid);
+        if (!fieldValid) valid = false;
+      });
+
+      if (!valid) {
+        form.reportValidity();
+        setStatus("Revisá los campos marcados antes de enviar.", true);
+        return null;
+      }
+
+      var lines = [
+        "Hola, soy " + name.value.trim() + ".",
+        "Año / comisión: " + year.value,
+        "Email: " + mail.value.trim(),
+        "",
+        message.value.trim(),
+      ];
+
+      return {
+        name: name.value.trim(),
+        text: lines.join("\n"),
+      };
+    }
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      var data = collect();
+      if (!data) return;
+
+      var url =
+        "https://wa.me/" + phone + "?text=" + encodeURIComponent(data.text);
+      window.open(url, "_blank", "noopener");
+      setStatus("Abriendo WhatsApp con tu mensaje, " + data.name + "…", false);
+      form.reset();
+    });
+
+    if (mailBtn) {
+      mailBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        var data = collect();
+        if (!data) return;
+
+        var url =
+          "mailto:" +
+          email +
+          "?subject=" +
+          encodeURIComponent("Consulta de " + data.name) +
+          "&body=" +
+          encodeURIComponent(data.text);
+        window.location.href = url;
+        setStatus("Abriendo tu cliente de email…", false);
+      });
+    }
+  }
+
+  /* ---------------- Animaciones al hacer scroll ---------------- */
+  function initReveal() {
+    if (!("IntersectionObserver" in window) || reduceMotion) return;
+
+    var targets = $$(
+      ".hero h1, .hero .lead, .cta-row, .section-head, .subject, .roster-row, .group-card, .contact-form, .foot-col"
+    );
+    if (!targets.length) return;
+
+    targets.forEach(function (el) {
+      el.classList.add("reveal");
+    });
+
+    var observer = new IntersectionObserver(
+      function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("visible");
+          obs.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    targets.forEach(function (el) {
+      observer.observe(el);
+    });
+  }
+
+  /* ---------------- Volver arriba ---------------- */
+  function initBackToTop() {
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "to-top";
+    button.setAttribute("aria-label", "Volver arriba");
+    button.innerHTML = "&uarr;";
+    document.body.appendChild(button);
+
+    function update() {
+      button.classList.toggle("show", window.scrollY > 400);
+    }
+
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+
+    button.addEventListener("click", function () {
+      window.scrollTo({
+        top: 0,
+        behavior: reduceMotion ? "auto" : "smooth",
+      });
+    });
+  }
+
+  function init() {
+    initMobileNav();
+    initReveal();
+    initBackToTop();
+    initCopyButtons();
+    initContactForm();
+
+    initSearch({
+      inputId: "resourceSearch",
+      emptyId: "resourceEmpty",
+      itemSelector: ".subject",
+    });
+
+    initSearch({
+      inputId: "groupSearch",
+      emptyId: "groupEmpty",
+      itemSelector: ".group-card",
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();

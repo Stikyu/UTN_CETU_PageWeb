@@ -6,7 +6,7 @@
 <title>Contacto · Centro de Estudiantes UTN</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -46,6 +46,41 @@
         <a class="wa" href="https://wa.me/5493410000002" target="_blank" rel="noopener">WhatsApp</a>
       </div>
     </div>
+
+    <form class="contact-form" id="contactForm" novalidate>
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="nombre">Nombre y apellido</label>
+          <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre" autocomplete="name">
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="tu@email.com" autocomplete="email">
+        </div>
+        <div class="form-field full">
+          <label for="anio">Año / comisión</label>
+          <select id="anio" name="anio" required>
+            <option value="">Elegí una opción</option>
+            <option>1er año</option>
+            <option>2do año</option>
+            <option>3er año</option>
+            <option>4to año</option>
+            <option>5to año</option>
+            <option>Egresado/a</option>
+            <option>Docente / otro</option>
+          </select>
+        </div>
+        <div class="form-field full">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" required placeholder="Contanos tu consulta…"></textarea>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Enviar por WhatsApp</button>
+        <button type="button" class="btn btn-ghost" id="mailBtn">Enviar por email</button>
+      </div>
+      <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+    </form>
   </div>
 </section>
 
@@ -59,9 +94,7 @@
       <div class="foot-col">
         <h4>Contacto</h4>
         <a href="https://wa.me/5493410000001" target="_blank" rel="noopener">+54 9 341 000-0001</a>
-        <a href="mailto:cetufeti@gmail.com">cetufeti@gmail.com
-          
-        </a>
+        <a href="mailto:cetufeti@gmail.com">cetufeti@gmail.com</a>
       </div>
       <div class="foot-col">
         <h4>Secciones</h4>
@@ -76,5 +109,6 @@
   </div>
 </footer>
 
+<script src="script.js"></script>
 </body>
 </html>
