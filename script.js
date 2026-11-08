@@ -68,15 +68,34 @@
     if (!input) return;
 
     var items = $$(config.itemSelector);
+    // Grupos (bloques y carreras), del más interno al más externo
+    var groups = $$("[data-search-group]").reverse();
+
+    function labelOf(el) {
+      var group = el.closest("[data-search-label]");
+      return group ? group.getAttribute("data-search-label") : "";
+    }
 
     input.addEventListener("input", function () {
       var query = normalize(input.value.trim());
       var visible = 0;
 
       items.forEach(function (item) {
-        var match = !query || normalize(item.textContent).indexOf(query) !== -1;
+        var text = normalize(item.textContent + " " + labelOf(item));
+        var match = !query || text.indexOf(query) !== -1;
         item.classList.toggle("is-hidden", !match);
         if (match) visible++;
+      });
+
+      groups.forEach(function (group) {
+        var label = normalize(group.getAttribute("data-search-label") || "");
+        var labelMatch = Boolean(query && label && label.indexOf(query) !== -1);
+        var hasVisible = $$(config.itemSelector + ":not(.is-hidden), [data-search-group]:not(.is-hidden)", group).length > 0;
+        var show = !query || labelMatch || hasVisible;
+        group.classList.toggle("is-hidden", !show);
+        if (labelMatch && !hasVisible) visible++;
+
+        if (group.tagName === "DETAILS") group.open = Boolean(query && show);
       });
 
       if (empty) empty.hidden = visible !== 0;
@@ -170,12 +189,34 @@
       status.classList.toggle("error", Boolean(isError));
     }
 
+    var DOMINIO = "@frcn.utn.edu.ar";
+
+    function validarMailFacultad(field) {
+      var value = field.value.trim().toLowerCase();
+      var usuario = value.slice(0, -DOMINIO.length);
+      var ok =
+        value.length > DOMINIO.length &&
+        value.slice(-DOMINIO.length) === DOMINIO &&
+        /^[a-z0-9._%+-]+$/.test(usuario);
+      field.setCustomValidity(
+        ok || value === "" ? "" : "Usá tu mail de la facultad (termina en " + DOMINIO + ")."
+      );
+    }
+
+    form.elements.email.addEventListener("input", function () {
+      validarMailFacultad(form.elements.email);
+    });
+
     function collect() {
       var name = form.elements.nombre;
+      var lastName = form.elements.apellido;
       var mail = form.elements.email;
       var year = form.elements.anio;
+      var career = form.elements.carrera;
       var message = form.elements.mensaje;
-      var fields = [name, mail, year, message];
+      var fields = [name, lastName, mail, year, career, message];
+
+      validarMailFacultad(mail);
 
       var valid = true;
       fields.forEach(function (field) {
@@ -190,16 +231,19 @@
         return null;
       }
 
+      var fullName = name.value.trim() + " " + lastName.value.trim();
+
       var lines = [
-        "Hola, soy " + name.value.trim() + ".",
-        "Año / comisión: " + year.value,
-        "Email: " + mail.value.trim(),
+        "Hola, soy " + fullName + ".",
+        "Carrera: " + career.value,
+        "Año: " + year.value,
+        "Mail: " + mail.value.trim().toLowerCase(),
         "",
         message.value.trim(),
       ];
 
       return {
-        name: name.value.trim(),
+        name: fullName,
         text: lines.join("\n"),
       };
     }

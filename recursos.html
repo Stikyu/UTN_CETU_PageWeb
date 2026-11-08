@@ -24,7 +24,7 @@
   </div>
 </header>
 
-<!-- EDITAR: agrupá por materia. Reemplazá los href="#" por los links reales de Google Drive / YouTube. -->
+<!-- EDITAR: reemplazá los href="#" por los links reales (archivos en apuntes/, Google Drive o YouTube). -->
 <section class="on-paper">
   <div class="wrap section-pad">
     <div class="section-head">
@@ -33,65 +33,308 @@
       <p>Material subido por compañeros y por el centro. Si tenés apuntes propios para sumar, mandalos por WhatsApp.</p>
     </div>
 
+    <nav class="jump-links" aria-label="Ir a una sección">
+      <a href="#basicas">Materias básicas</a>
+      <a href="#especificas">Materias específicas</a>
+    </nav>
+
     <div class="search-box">
-      <input type="search" id="resourceSearch" placeholder="Buscar materia o recurso…" aria-label="Buscar materias y recursos">
+      <input type="search" id="resourceSearch" placeholder="Buscar materia o carrera…" aria-label="Buscar materias y carreras">
     </div>
-    <p class="search-empty" id="resourceEmpty" hidden>No se encontraron recursos para tu búsqueda.</p>
+    <p class="search-empty" id="resourceEmpty" hidden>No se encontraron materias para tu búsqueda.</p>
 
-    <div class="subject">
-      <h3>Análisis Matemático I</h3>
-      <div class="res-links">
-        <a class="res-link" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 12L14 3.5H4.5A2.5 2.5 0 0 0 2 6v12a2.5 2.5 0 0 0 2.5 2.5H20A2.5 2.5 0 0 0 22.5 18Z"/></svg>
-          Apuntes en Drive
-        </a>
-        <a class="res-link" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
-          Videos explicativos
-        </a>
+    <!-- ===== MATERIAS BÁSICAS (comunes a todas las carreras) ===== -->
+    <div class="res-block" id="basicas" data-search-group>
+      <div class="block-head">
+        <h3>Materias básicas</h3>
+        <p>Comunes a todas las carreras.</p>
+      </div>
+      <div class="subject-grid">
+        <div class="subject">
+          <h3>Análisis Matemático I</h3>
+          <div class="res-links">
+            <a class="res-link" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 12L14 3.5H4.5A2.5 2.5 0 0 0 2 6v12a2.5 2.5 0 0 0 2.5 2.5H20A2.5 2.5 0 0 0 22.5 18Z"/></svg>
+              Apuntes
+            </a>
+            <a class="res-link" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
+              Videos
+            </a>
+          </div>
+        </div>
+        <div class="subject">
+          <h3>Análisis Matemático II</h3>
+          <div class="res-links">
+            <a class="res-link" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 12L14 3.5H4.5A2.5 2.5 0 0 0 2 6v12a2.5 2.5 0 0 0 2.5 2.5H20A2.5 2.5 0 0 0 22.5 18Z"/></svg>
+              Apuntes
+            </a>
+            <a class="res-link" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
+              Videos
+            </a>
+          </div>
+        </div>
+        <div class="subject">
+          <h3>Álgebra y Geometría Analítica</h3>
+          <div class="res-links">
+            <a class="res-link" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 12L14 3.5H4.5A2.5 2.5 0 0 0 2 6v12a2.5 2.5 0 0 0 2.5 2.5H20A2.5 2.5 0 0 0 22.5 18Z"/></svg>
+              Apuntes
+            </a>
+            <a class="res-link" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
+              Videos
+            </a>
+          </div>
+        </div>
+        <div class="subject">
+          <h3>Física I</h3>
+          <div class="res-links">
+            <a class="res-link" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 12L14 3.5H4.5A2.5 2.5 0 0 0 2 6v12a2.5 2.5 0 0 0 2.5 2.5H20A2.5 2.5 0 0 0 22.5 18Z"/></svg>
+              Apuntes
+            </a>
+            <a class="res-link" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
+              Videos
+            </a>
+          </div>
+        </div>
+        <div class="subject">
+          <h3>Física II</h3>
+          <div class="res-links">
+            <a class="res-link" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 12L14 3.5H4.5A2.5 2.5 0 0 0 2 6v12a2.5 2.5 0 0 0 2.5 2.5H20A2.5 2.5 0 0 0 22.5 18Z"/></svg>
+              Apuntes
+            </a>
+            <a class="res-link" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
+              Videos
+            </a>
+          </div>
+        </div>
+        <div class="subject">
+          <h3>Inglés I</h3>
+          <div class="res-links">
+            <a class="res-link" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 12L14 3.5H4.5A2.5 2.5 0 0 0 2 6v12a2.5 2.5 0 0 0 2.5 2.5H20A2.5 2.5 0 0 0 22.5 18Z"/></svg>
+              Apuntes
+            </a>
+            <a class="res-link" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
+              Videos
+            </a>
+          </div>
+        </div>
+        <div class="subject">
+          <h3>Inglés II</h3>
+          <div class="res-links">
+            <a class="res-link" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 12L14 3.5H4.5A2.5 2.5 0 0 0 2 6v12a2.5 2.5 0 0 0 2.5 2.5H20A2.5 2.5 0 0 0 22.5 18Z"/></svg>
+              Apuntes
+            </a>
+            <a class="res-link" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
+              Videos
+            </a>
+          </div>
+        </div>
+        <div class="subject">
+          <h3>Inglés III</h3>
+          <div class="res-links">
+            <a class="res-link" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 12L14 3.5H4.5A2.5 2.5 0 0 0 2 6v12a2.5 2.5 0 0 0 2.5 2.5H20A2.5 2.5 0 0 0 22.5 18Z"/></svg>
+              Apuntes
+            </a>
+            <a class="res-link" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
+              Videos
+            </a>
+          </div>
+        </div>
+        <div class="subject">
+          <h3>Ingeniería y Sociedad</h3>
+          <div class="res-links">
+            <a class="res-link" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 12L14 3.5H4.5A2.5 2.5 0 0 0 2 6v12a2.5 2.5 0 0 0 2.5 2.5H20A2.5 2.5 0 0 0 22.5 18Z"/></svg>
+              Apuntes
+            </a>
+            <a class="res-link" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
+              Videos
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="subject">
-      <h3>Álgebra y Geometría Analítica</h3>
-      <div class="res-links">
-        <a class="res-link" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 12L14 3.5H4.5A2.5 2.5 0 0 0 2 6v12a2.5 2.5 0 0 0 2.5 2.5H20A2.5 2.5 0 0 0 22.5 18Z"/></svg>
-          Apuntes en Drive
-        </a>
-        <a class="res-link" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
-          Videos explicativos
-        </a>
+    <!-- ===== MATERIAS ESPECÍFICAS (una sección por carrera) ===== -->
+    <div class="res-block" id="especificas" data-search-group>
+      <div class="block-head">
+        <h3>Materias específicas</h3>
+        <p>Elegí tu carrera para ver sus materias.</p>
       </div>
-    </div>
 
-    <div class="subject">
-      <h3>Programación I</h3>
-      <div class="res-links">
-        <a class="res-link" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 12L14 3.5H4.5A2.5 2.5 0 0 0 2 6v12a2.5 2.5 0 0 0 2.5 2.5H20A2.5 2.5 0 0 0 22.5 18Z"/></svg>
-          Apuntes en Drive
-        </a>
-        <a class="res-link" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
-          Videos explicativos
-        </a>
-      </div>
-    </div>
+      <details class="career" data-search-group data-search-label="Ingeniería en Sistemas de Información">
+        <summary><span class="career-name">Ingeniería en Sistemas de Información</span><span class="career-count">8 materias</span></summary>
+        <div class="subject-grid">
+          <div class="subject">
+            <h3>Algoritmos y Estructuras de Datos</h3>
+            <div class="res-links">
+              <a class="res-link" href="#" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 12L14 3.5H4.5A2.5 2.5 0 0 0 2 6v12a2.5 2.5 0 0 0 2.5 2.5H20A2.5 2.5 0 0 0 22.5 18Z"/></svg>
+                Apuntes
+              </a>
+              <a class="res-link" href="#" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
+                Videos
+              </a>
+            </div>
+          </div>
+          <div class="subject">
+            <h3>Lógica y Estructuras Discretas</h3>
+            <div class="res-links">
+              <a class="res-link" href="#" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 12L14 3.5H4.5A2.5 2.5 0 0 0 2 6v12a2.5 2.5 0 0 0 2.5 2.5H20A2.5 2.5 0 0 0 22.5 18Z"/></svg>
+                Apuntes
+              </a>
+              <a class="res-link" href="#" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
+                Videos
+              </a>
+            </div>
+          </div>
+          <div class="subject">
+            <h3>Sistemas y Procesos de Negocio</h3>
+            <div class="res-links">
+              <a class="res-link" href="#" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 12L14 3.5H4.5A2.5 2.5 0 0 0 2 6v12a2.5 2.5 0 0 0 2.5 2.5H20A2.5 2.5 0 0 0 22.5 18Z"/></svg>
+                Apuntes
+              </a>
+              <a class="res-link" href="#" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
+                Videos
+              </a>
+            </div>
+          </div>
+          <div class="subject">
+            <h3>Arquitectura de Computadoras</h3>
+            <div class="res-links">
+              <a class="res-link" href="#" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 12L14 3.5H4.5A2.5 2.5 0 0 0 2 6v12a2.5 2.5 0 0 0 2.5 2.5H20A2.5 2.5 0 0 0 22.5 18Z"/></svg>
+                Apuntes
+              </a>
+              <a class="res-link" href="#" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
+                Videos
+              </a>
+            </div>
+          </div>
+          <div class="subject subject-wide">
+            <h3>Paradigmas de Programación</h3>
+            <p class="res-label">Apuntes teóricos (PDF)</p>
+            <div class="res-links">
+              <a class="res-link" href="apuntes/paradigmas/U1-Introduccion.pdf" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+                U1 · Introducción
+              </a>
+              <a class="res-link" href="apuntes/paradigmas/U2-Bases-de-programacion.pdf" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+                U2 · Bases de programación
+              </a>
+              <a class="res-link" href="apuntes/paradigmas/U3-Orientado-a-objetos.pdf" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+                U3 · Orientado a objetos
+              </a>
+              <a class="res-link" href="apuntes/paradigmas/U4-Orientado-a-eventos.pdf" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+                U4 · Orientado a eventos
+              </a>
+              <a class="res-link" href="apuntes/paradigmas/U5-Funcional.pdf" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+                U5 · Funcional
+              </a>
+              <a class="res-link" href="apuntes/paradigmas/U6-Logico.pdf" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+                U6 · Lógico
+              </a>
+            </div>
+            <p class="res-label">Videos</p>
+            <div class="res-links">
+              <a class="res-link" href="https://youtu.be/SI7O81GMG2A" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
+                Video: Paradigma orientado a objetos
+              </a>
+            </div>
+          </div>
+          <div class="subject">
+            <h3>Análisis de Sistemas de Información</h3>
+            <div class="res-links">
+              <a class="res-link" href="#" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 12L14 3.5H4.5A2.5 2.5 0 0 0 2 6v12a2.5 2.5 0 0 0 2.5 2.5H20A2.5 2.5 0 0 0 22.5 18Z"/></svg>
+                Apuntes
+              </a>
+              <a class="res-link" href="#" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
+                Videos
+              </a>
+            </div>
+          </div>
+          <div class="subject">
+            <h3>Sintaxis y Semántica de los Lenguajes</h3>
+            <div class="res-links">
+              <a class="res-link" href="#" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 12L14 3.5H4.5A2.5 2.5 0 0 0 2 6v12a2.5 2.5 0 0 0 2.5 2.5H20A2.5 2.5 0 0 0 22.5 18Z"/></svg>
+                Apuntes
+              </a>
+              <a class="res-link" href="#" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
+                Videos
+              </a>
+            </div>
+          </div>
+          <div class="subject">
+            <h3>Sistemas Operativos</h3>
+            <div class="res-links">
+              <a class="res-link" href="#" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 12L14 3.5H4.5A2.5 2.5 0 0 0 2 6v12a2.5 2.5 0 0 0 2.5 2.5H20A2.5 2.5 0 0 0 22.5 18Z"/></svg>
+                Apuntes
+              </a>
+              <a class="res-link" href="#" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
+                Videos
+              </a>
+            </div>
+          </div>
+        </div>
+      </details>
 
-    <div class="subject">
-      <h3>Física I</h3>
-      <div class="res-links">
-        <a class="res-link" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 12L14 3.5H4.5A2.5 2.5 0 0 0 2 6v12a2.5 2.5 0 0 0 2.5 2.5H20A2.5 2.5 0 0 0 22.5 18Z"/></svg>
-          Apuntes en Drive
-        </a>
-        <a class="res-link" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
-          Videos explicativos
-        </a>
-      </div>
+      <details class="career" data-search-group data-search-label="Ingeniería Mecánica">
+        <summary><span class="career-name">Ingeniería Mecánica</span><span class="career-count">Próximamente</span></summary>
+        <p class="career-empty">Todavía no cargamos las materias de esta carrera.</p>
+      </details>
+
+      <details class="career" data-search-group data-search-label="Ingeniería Industrial">
+        <summary><span class="career-name">Ingeniería Industrial</span><span class="career-count">Próximamente</span></summary>
+        <p class="career-empty">Todavía no cargamos las materias de esta carrera.</p>
+      </details>
+
+      <details class="career" data-search-group data-search-label="Ingeniería Eléctrica">
+        <summary><span class="career-name">Ingeniería Eléctrica</span><span class="career-count">Próximamente</span></summary>
+        <p class="career-empty">Todavía no cargamos las materias de esta carrera.</p>
+      </details>
+
+      <details class="career" data-search-group data-search-label="Ingeniería Metalúrgica">
+        <summary><span class="career-name">Ingeniería Metalúrgica</span><span class="career-count">Próximamente</span></summary>
+        <p class="career-empty">Todavía no cargamos las materias de esta carrera.</p>
+      </details>
+
+      <details class="career" data-search-group data-search-label="Ingeniería Electrónica">
+        <summary><span class="career-name">Ingeniería Electrónica</span><span class="career-count">Próximamente</span></summary>
+        <p class="career-empty">Todavía no cargamos las materias de esta carrera.</p>
+      </details>
     </div>
   </div>
 </section>

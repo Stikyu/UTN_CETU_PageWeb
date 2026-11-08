@@ -50,15 +50,19 @@
     <form class="contact-form" id="contactForm" novalidate>
       <div class="form-grid">
         <div class="form-field">
-          <label for="nombre">Nombre y apellido</label>
-          <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre" autocomplete="name">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre" autocomplete="given-name">
         </div>
         <div class="form-field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required placeholder="tu@email.com" autocomplete="email">
+          <label for="apellido">Apellido</label>
+          <input type="text" id="apellido" name="apellido" required placeholder="Tu apellido" autocomplete="family-name">
         </div>
         <div class="form-field full">
-          <label for="anio">Año / comisión</label>
+          <label for="email">Mail de la facultad</label>
+          <input type="email" id="email" name="email" required placeholder="usuario@frcn.utn.edu.ar" autocomplete="email">
+        </div>
+        <div class="form-field">
+          <label for="anio">Año</label>
           <select id="anio" name="anio" required>
             <option value="">Elegí una opción</option>
             <option>1er año</option>
@@ -66,8 +70,19 @@
             <option>3er año</option>
             <option>4to año</option>
             <option>5to año</option>
-            <option>Egresado/a</option>
-            <option>Docente / otro</option>
+            <option>Graduado/a</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="carrera">Carrera</label>
+          <select id="carrera" name="carrera" required>
+            <option value="">Elegí una opción</option>
+            <option>Ingeniería Mecánica</option>
+            <option>Ingeniería en Sistemas de Información</option>
+            <option>Ingeniería Electrónica</option>
+            <option>Ingeniería Eléctrica</option>
+            <option>Ingeniería Metalúrgica</option>
+            <option>Ingeniería Industrial</option>
           </select>
         </div>
         <div class="form-field full">
