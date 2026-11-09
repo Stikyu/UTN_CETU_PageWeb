@@ -178,7 +178,7 @@
 
     var phone = waFooter
       ? waFooter.href.split("wa.me/")[1].split("?")[0]
-      : "5493410000001";
+      : "5493364000001";
     var email = mailFooter
       ? mailFooter.href.replace("mailto:", "").split("?")[0]
       : "cetufeti@gmail.com";
