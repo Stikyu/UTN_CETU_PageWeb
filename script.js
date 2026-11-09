@@ -178,7 +178,7 @@
 
     var phone = waFooter
       ? waFooter.href.split("wa.me/")[1].split("?")[0]
-      : "5493410000001";
+      : "5493364000001";
     var email = mailFooter
       ? mailFooter.href.replace("mailto:", "").split("?")[0]
       : "cetufeti@gmail.com";
@@ -189,7 +189,7 @@
       status.classList.toggle("error", Boolean(isError));
     }
 
-    var DOMINIO = "@frcn.utn.edu.ar";
+    var DOMINIO = "@frsn.utn.edu.ar";
 
     function validarMailFacultad(field) {
       var value = field.value.trim().toLowerCase();
@@ -256,8 +256,10 @@
       var url =
         "https://wa.me/" + phone + "?text=" + encodeURIComponent(data.text);
       window.open(url, "_blank", "noopener");
+      // No se borra el formulario: si la persona cierra WhatsApp sin
+      // enviar, no pierde lo que escribió. Para empezar de nuevo está
+      // el botón "Borrar".
       setStatus("Abriendo WhatsApp con tu mensaje, " + data.name + "…", false);
-      form.reset();
     });
 
     if (mailBtn) {
@@ -277,6 +279,69 @@
         setStatus("Abriendo tu cliente de email…", false);
       });
     }
+
+    form.addEventListener("reset", function () {
+      $$(".invalid", form).forEach(function (field) {
+        field.classList.remove("invalid");
+        field.setCustomValidity("");
+      });
+      setStatus("", false);
+    });
+  }
+
+  /* ---------------- Links pendientes ("Próximamente") ---------------- */
+  // Los links con href="#" todavía no tienen material: se muestran
+  // deshabilitados. Al poner el link real, se activan solos.
+  function initPendingLinks() {
+    $$('a.res-link[href="#"], a.group-card[href="#"]').forEach(function (link) {
+      link.classList.add("is-pending");
+      link.removeAttribute("target");
+      link.setAttribute("aria-disabled", "true");
+      link.setAttribute("tabindex", "-1");
+      link.title = "Todavía no hay material cargado";
+
+      if (link.classList.contains("group-card")) {
+        var join = $(".g-join", link);
+        if (join) join.textContent = "Próximamente";
+      } else {
+        var badge = document.createElement("span");
+        badge.className = "soon";
+        badge.textContent = "Próximamente";
+        link.appendChild(badge);
+      }
+
+      link.addEventListener("click", function (event) {
+        event.preventDefault();
+      });
+    });
+  }
+
+  /* ---------------- Peso de los PDF ---------------- */
+  // Muestra el tamaño de cada PDF propio para que nadie descargue
+  // algo enorme con datos móviles sin saberlo.
+  function formatSize(bytes) {
+    var mb = bytes / (1024 * 1024);
+    if (mb >= 1) return mb.toFixed(mb >= 10 ? 0 : 1).replace(".", ",") + " MB";
+    return Math.max(1, Math.round(bytes / 1024)) + " KB";
+  }
+
+  function initPdfSizes() {
+    if (!window.fetch || location.protocol === "file:") return;
+
+    $$('a.res-link[href$=".pdf"]').forEach(function (link) {
+      if (/^https?:/i.test(link.getAttribute("href"))) return;
+
+      fetch(link.href, { method: "HEAD" })
+        .then(function (response) {
+          var length = Number(response.headers.get("content-length"));
+          if (!response.ok || !length) return;
+          var size = document.createElement("span");
+          size.className = "res-size";
+          size.textContent = formatSize(length);
+          link.appendChild(size);
+        })
+        .catch(function () {});
+    });
   }
 
   /* ---------------- Animaciones al hacer scroll ---------------- */
@@ -334,6 +399,8 @@
 
   function init() {
     initMobileNav();
+    initPendingLinks();
+    initPdfSizes();
     initReveal();
     initBackToTop();
     initCopyButtons();
